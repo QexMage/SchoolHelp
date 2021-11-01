@@ -183,9 +183,9 @@ function setEventListeners() {
                         e.target.classList.remove("is-invalid");
                         document.getElementById(`${e.target.id}-error`).style.display = "none"
                     }
+                checkform(forms)
                 })
                 break;
-
             case "email": 
                 element.addEventListener("keyup", function(e) {
                     if(!validemail(e.target.value))  {
@@ -196,16 +196,16 @@ function setEventListeners() {
                         e.target.classList.remove("is-invalid");
                         document.getElementById(`${e.target.id}-error`).style.display = "none"
                     }
+                checkform(forms)
                 })
                 break;
-            
             case "password": 
             // Gör en "specialare här. Eftersom vi har två olika password fält som ska valideras på två olika sätt.
             element.addEventListener("keyup", function(e) {
                 validatePasswords(e);
+                checkform(forms)
             })
             break;
-
             case "number": 
             element.addEventListener("keyup", function(e) {
                 if(!validateMinimumLength(e.target.value, 5)) {
@@ -216,27 +216,26 @@ function setEventListeners() {
                     e.target.classList.remove("is-invalid");
                     document.getElementById(`${e.target.id}-error`).style.display = "none"
                 }
+                checkform(forms)
             })
             break;
         }     
     })
 }
 
-// function checkform(elements) {
-//     let disable = false
-//     let errors = document.querySelectorAll('.is-invalid')
-//     let submitButton = document.querySelectorAll('.submit')[0]   
+function checkform(elements) {
+    let disable = false
+    let errors = document.querySelectorAll('.is-invalid')
+    let submitButton = document.getElementById('btn')
+    console.log(submitButton);
+    elements.forEach(element => {
+        if(element.value === "" || errors.length > 0)
+            disable = true
+    })
+    submitButton.disabled = disable;
+}
 
-//     elements.forEach(element => {
-//         if(element.value === "" || errors.length > 0)
-//             disable = true
-//     })     
-
-//     if(submitButton !== undefined)
-//         submitButton.disabled = disable
-// }
-
-// function onSubmit(e) {
-//     e.preventDefault()
-//     console.log("submitted")
-// }
+document.getElementById("btn").addEventListener("click", function(e) {
+    e.preventDefault()
+    console.log("Submitted")
+});
