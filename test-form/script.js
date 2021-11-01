@@ -164,9 +164,6 @@ function dateDiffInDays(todaysDate, birthDate) {
   return difference / (1000 * 3600 * 24);
 }
 
-
-
-
 var forms = document.querySelectorAll('.needs-validation')
 setEventListeners()
 checkform(forms)
